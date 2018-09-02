@@ -26,12 +26,9 @@ class RecyclerViewAdapter(private val context: Context, private val items: List<
         private val name = view.findViewById<TextView>(R.id.name)
         private val image = view.findViewById<ImageView>(R.id.image)
 
-        fun bindItem(items: ClubItem, listener: (ClubItem) -> Unit) {
+        fun bindItem(items: ClubItem) {
             name.text = items.name
             Glide.with(itemView.context).load(items.image).into(image)
-            itemView.setOnClickListener {
-                listener(items)
-            }
         }
     }
 }

@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,13 +18,16 @@ class MainActivity : AppCompatActivity() {
         val list = findViewById<RecyclerView>(R.id.list_club)
         initData()
 
-        list.layoutManager = LinearLayoutManager(this)
-        list.adapter = RecyclerViewAdapter(this, items)
+        list_club.layoutManager = LinearLayoutManager(this)
+        list_club.adapter = RecyclerViewAdapter(this, items){
+            startActivity<DetailClub>("detail" to "detail")
+        }
     }
 
     private fun initData(){
         val name = resources.getStringArray(R.array.club_name)
         val image = resources.obtainTypedArray(R.array.club_image)
+        val detail = resources.getStringArray(R.array.club_detail)
         items.clear()
         for (i in name.indices) {
             items.add(ClubItem(name[i],
@@ -32,4 +37,5 @@ class MainActivity : AppCompatActivity() {
         //Recycle the typed array
         image.recycle()
     }
+
 }
